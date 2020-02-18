@@ -1,3 +1,5 @@
+[菜鸟shell教程](https://www.runoob.com/linux/linux-shell-variable.html)
+
 # Shell 命令脚本
 
 Shell 脚本文件的名称可以任意，建议将.sh 后缀加上，以表示是一个脚本文件。
@@ -150,3 +152,19 @@ done
 > 需要多说一句，/dev/null 是一个被称作 Linux 黑洞的文件，把输出信息重定向到这个文件等同于删除数据（类似于没有回收功能的垃圾箱），可以让用户的屏幕窗口保持简洁。
 
 ### while 条件循环语句
+执行前并不确定最终执行的次数
+
+![sshot-2020-02-15-[1].png](http://ww1.sinaimg.cn/large/006rgJELly1gbwy6ok0x4j306q04874d.jpg)
+
+例子：
+```sh
+#!/bin/bash
+#在CASE变量小于等于20的时候一直运行
+CASE=0                  #初始化变量
+echo "case = $CASE"     #显示变量
+while [ $CASE -le 20 ]  #while条件
+do                      #while开始
+CASE=`expr $CASE + 1`   #相当于CASE++
+echo "case = $CASE"     #显示下CASE的值
+done                    #结束
+```
