@@ -3,6 +3,77 @@
 * [电子书](https://pan.baidu.com/s/1plj-7aoB7E0GF1PfjKb5qw)
 提取码：65x8 
 
+## 控制台常用快捷键
+按键 | 作用
+---|---
+Ctrl+d | 键盘输入结束或退出终端
+Ctrl+s | 暂停当前程序，暂停后按下任意键恢复运行
+Ctrl+z | 将当前程序放到后台运行，恢复到前台为命令fg
+Ctrl+a | 将光标移至输入行头，相当于Home键
+Ctrl+e | 将光标移至输入行末，相当于End键
+Ctrl+k | 删除从光标所在位置到行末
+Alt+Backspace	| 向前删除一个单词
+Shift+PgUp	| 将终端显示向上滚动
+Shift+PgDn	| 将终端显示向下滚动
+
+## 一次性创建多个文件
+```
+$ touch love_{1..10}_shiyanlou.txt
+```
+
+## 常用通配符
+
+字符 |	含义
+---|---
+* |	匹配 0 或多个字符
+? |	匹配任意一个字符
+[list] |	匹配 list 中的任意单一字符
+[^list] |	匹配 除 list 中的任意单一字符以外的字符
+[c1-c2] |	匹配 c1-c2 中的任意单一字符 如：[0-9][a-z]
+{string1,string2,...} |	匹配 string1 或 string2 (或更多)其一字符串
+{c1..c2} |	匹配 c1-c2 中全部字符 如{1..10}
+
+## 创建和切换用户
+创建用户(默认会让输入密码)
+```
+sudo adduser <USERNAME>
+```
+修改密码
+```
+sudo passwd <USERNAME>
+```
+切换用户
+```
+su <USERNAME>
+```
+查看当前用户是谁
+```
+whoami
+```
+查看用户组
+```
+cat /etc/group | grep -E "<USERNAME>"
+```
+给新建的用户sudo权限
+```
+usermod -G sudo <USERNAME>
+```
+删除用户(把它创建时自动创建的用户目录一并删除)
+```
+sudo deluser lilei --remove-home
+```
+ **adduser 和 useradd 的区别是什么**
+
+> 答：useradd 只创建用户，不会创建用户密码和工作目录，创建完了需要使用 passwd <username> 去设置新用户的密码。adduser 在创建用户的同时，会创建工作目录和密码（提示你设置），做这一系列的操作。其实 useradd、userdel 这类操作更像是一种命令，执行完了就返回。而 adduser 更像是一种程序，需要你输入、确定等一系列操作
+## 文件和权限
+![图像权限](https://doc.shiyanlou.com/linux_base/3-10.png/wm)
+这个图是在使用`ls -l`时候前部的意义。
+使用chmod可以修改权限。每一个数字代表对应权限
+```
+rwx|r-x|r-x
+111|101|101 = 755
+```
+
 ## 配置主机名称
 `4.1.2 配置主机名称`
 1. 使用 Vim 编辑器修改“/etc/hostname”主机名称文件。
