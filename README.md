@@ -80,10 +80,16 @@ sudo deluser lilei --remove-home
 ## 文件和权限
 ![图像权限](https://doc.shiyanlou.com/linux_base/3-10.png/wm)
 这个图是在使用`ls -l`时候前部的意义。
-使用chmod可以修改权限。每一个数字代表对应权限
+
+chmod 修改权限。每一个数字代表对应权限
 ```
 rwx|r-x|r-x
 111|101|101 = 755
+```
+
+chown 修改所有者
+```
+chown <usrname> <filename>
 ```
 ## 创建文件和目录
 touch 可以创建文件/更新文件时间戳。
@@ -181,6 +187,23 @@ ${变量名/旧的字串/新的字串} |	将符合旧字串的第一个字串替
 ${变量名//旧的字串/新的字串} |	将符合旧字串的全部字串替换为新的字串
 
 
+## 搜索文件
+whereis 简单快速
+
+> whereis 只能搜索二进制文件(-b)，man 帮助文件(-m)和源代码文件(-s)。如果想要获得更全面的搜索结果可以使用 locate 命令。
+
+locate快而全 使用要先安装,并且更新索引数据库
+```
+sudo apt-get update
+sudo apt-get install locate
+sudo updatedb
+```
+
+find 超强大
+> 寻找/etc中(包括子目录)名为的 sources.list文件
+```
+find /etc -name sources.list
+```
 ---
 ## 配置主机名称
 `4.1.2 配置主机名称`
