@@ -1,3 +1,5 @@
+> replace your source with tuna speed up apt-update : https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/
+
 > this is for ubuntu , but igeuss it will working well on other linux machines too.
 1. download Qv2ray here: https://github.com/Qv2ray/Qv2ray/releases
 2. download v2ray-core here (linux-64 ver):https://github.com/v2ray/v2ray-core/releases
