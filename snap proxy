@@ -1,0 +1,4 @@
+设置snapstore 的代理来让snapstore可以安装软件
+
+sudo snap set system proxy.http="http://127.0.0.1:8889"
+sudo snap set system proxy.https="http://127.0.0.1:8889"
