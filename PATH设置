@@ -1,0 +1,5 @@
+设置环境变量（A跳转行尾，每个路径用冒号分开）
+vim /etc/environment
+
+马上生效：
+. /etc/environment
