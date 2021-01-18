@@ -22,11 +22,11 @@ def baobao(xuehao,mima):
 
    button = browser.find_by_css('.submit_button')
    button.click() #登录
-   links_found = browser.find_link_by_href('DayReportSelect.aspx')
+   links_found = browser.links.find_by_href('DayReportSelect.aspx')
    links_found.click() #进入每日一报
-   browser.fill('p1$TiWen', '36') #填写体温 36
    button4 = browser.find_by_id('fineui_2-inputEl-icon')
    button4.click()
+   browser.fill('p1$TiWen', '36') #填写体温 36
    button5 = browser.find_by_css('.f-field-body-checkboxlabel')
    button5.click(); # 我承诺，以下内容真实有效！
 
@@ -34,11 +34,23 @@ def baobao(xuehao,mima):
    button2.click()#提交
    button3 = browser.find_by_id('fineui_37')
    button3.click()#本人承诺填写属实
-   time.sleep(3)
-   print("报道成功",xuehao)
+
+   
+   for waittime in range(30):
+      time.sleep(1)
+      chenggong = browser.is_element_present_by_text('提交成功(Submit successfully)')
+      if chenggong :
+         print('成功：',xuehao)
+         break
+      else :
+         print('*失败',xuehao,'尝试次数：', waittime)
+
+   print("--退出浏览器--")
    browser.quit() #退出浏览器
 
 if __name__ == "__main__":
+   localtime = time.asctime( time.localtime(time.time()) )
+   print(localtime)
    we = [
       ['20171113336','Jinghaoyang1'],
       ['20171113205','zyw981220'],
@@ -46,6 +58,7 @@ if __name__ == "__main__":
    ]
    for person in we:
       baobao(person[0],person[1])
+   print("finish-")
 
    # print(we[0][0],we[0][1])
    #  baobao(we[1][1],we[1][2])
