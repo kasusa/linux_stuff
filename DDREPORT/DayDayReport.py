@@ -11,11 +11,14 @@
 5. 把这个py脚本设置成开机执行.
 '''
 import time
+import sys
+import logging
 from splinter import Browser
+f = open("DDRPlog.txt", "a")   
+sys.stdout=f
 
 def baobao(xuehao,mima): 
-   # 指定driver为chrome浏览器,指定driver位置
-   browser = Browser(driver_name='chrome',executable_path='/bin/chromedriver')
+   browser = Browser(driver_name='chrome',executable_path='/bin/chromedriver')   
    browser.visit('https://id.sspu.edu.cn/cas/login?service=https%3a%2f%2fhsm.sspu.edu.cn%2fselfreport%2fLoginSSO.aspx%3ftargetUrl%3d%7bbase64%7daHR0cHM6Ly9oc20uc3NwdS5lZHUuY24vc2VsZnJlcG9ydC9JbmRleC5hc3B4')
    browser.fill('username', xuehao) #你的学号
    browser.fill('password', mima) #你的密码
@@ -33,19 +36,35 @@ def baobao(xuehao,mima):
    button2 = browser.find_by_css('.f-btn-text')
    button2.click()#提交
    button3 = browser.find_by_id('fineui_37')
-   button3.click()#本人承诺填写属实
+   button3.click()#本人承诺填写属实   # 指定driver为chrome浏览器,指定driver位置
 
-   
    for waittime in range(30):
-      time.sleep(1)
-      chenggong = browser.is_element_present_by_text('提交成功(Submit successfully)')
-      if chenggong :
+      time.sleep(5)
+
+      if browser.is_element_present_by_text('提交成功(Submit successfully)') :
          print('成功：',xuehao)
          break
+      elif browser.is_element_present_by_text('请求超时，请刷新页面并重试！'):
+         # 遇到这种情况，刷新页面，重新填表提交
+         browser.reload()
+         button = browser.find_by_css('.submit_button')
+         button.click() #登录
+         links_found = browser.links.find_by_href('DayReportSelect.aspx')
+         links_found.click() #进入每日一报
+         button4 = browser.find_by_id('fineui_2-inputEl-icon')
+         button4.click()
+         browser.fill('p1$TiWen', '36') #填写体温 36
+         button5 = browser.find_by_css('.f-field-body-checkboxlabel')
+         button5.click(); # 我承诺，以下内容真实有效！
+         button2 = browser.find_by_css('.f-btn-text')
+         button2.click()#提交
+         button3 = browser.find_by_id('fineui_37')
+         button3.click()#本人承诺填写属实   # 指定driver为chrome浏览器,指定driver位置
       else :
-         print('*失败',xuehao,'尝试次数：', waittime)
-
+         print('*加载',xuehao,'等待次数：', waittime+1)
+   time.sleep(3)
    print("--退出浏览器--")
+   
    browser.quit() #退出浏览器
 
 if __name__ == "__main__":
@@ -58,7 +77,6 @@ if __name__ == "__main__":
    ]
    for person in we:
       baobao(person[0],person[1])
-   print("finish-")
-
-   # print(we[0][0],we[0][1])
-   #  baobao(we[1][1],we[1][2])
+      
+      # f.writelines('hihihi')
+   print("finish-\n")
