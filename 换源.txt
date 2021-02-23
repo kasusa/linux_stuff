@@ -1,0 +1,4 @@
+ps：也可以通过内置的software & update来测试和更换中国源
+
+清华： https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/
+阿里： https://developer.aliyun.com/mirror/ubuntu
