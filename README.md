@@ -66,9 +66,10 @@ whoami
 ```
 cat /etc/group | grep -E "<USERNAME>"
 ```
-给新建的用户sudo权限
+给新建的用户sudo权限(第二条是centos里面的情况。)
 ```
 usermod -G sudo <USERNAME>
+usermod -aG wheel <USERNAME> 
 ```
 删除用户(把它创建时自动创建的用户目录一并删除)
 ```
