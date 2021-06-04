@@ -3,3 +3,4 @@ vim /etc/environment
 
 马上生效：
 . /etc/environment
+
